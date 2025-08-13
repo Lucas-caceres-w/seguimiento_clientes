@@ -9,9 +9,20 @@ use Illuminate\Support\Facades\Auth;
 class ClienteController extends Controller
 {
 
-    public function index()
+    public function index(Request $request)
     {
-        $clientes = Cliente::where('user_id', Auth::id())->latest()->paginate(10);
+        $query = Cliente::where('user_id', Auth::id());
+
+        if ($request->filled('dni')) {
+            $query->where('dni', 'like', '%' . $request->dni . '%');
+        }
+
+        $clientes = $query->latest()->paginate(10);
+
+        if ($request->ajax()) {
+            return view('clientes.partials.table', compact('clientes'))->render();
+        }
+
         return view('clientes.index', compact('clientes'));
     }
 
