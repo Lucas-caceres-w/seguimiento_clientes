@@ -23,10 +23,13 @@ class ClienteController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'dni' => 'required|string|max:255',
+            'dni' => 'required|string|max:255|unique:clientes,dni',
             'asesorado' => 'required|string|max:255',
             'telefono' => 'nullable|string|max:20',
+        ], [
+            'dni.unique' => 'El DNI ingresado ya existe en la base de datos.',
         ]);
+
 
         $duracion = ($request->asesorado === 'w3') ? 3 : 7;
 
@@ -49,9 +52,11 @@ class ClienteController extends Controller
     public function update(Request $request, Cliente $cliente)
     {
         $request->validate([
-            'dni' => 'required|string|max:255',
+            'dni' => 'required|string|max:255|unique:clientes,dni,' . $cliente->id,
             'asesorado' => 'required|string|max:255',
             'telefono' => 'nullable|string|max:20',
+        ], [
+            'dni.unique' => 'El DNI ingresado ya existe en la base de datos.',
         ]);
 
         $duracion = ($request->asesorado === 'w3') ? 3 : 7;

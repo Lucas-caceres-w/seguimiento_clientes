@@ -36,8 +36,15 @@
                         <tr>
                             <td class="p-3">{{ $cliente->dni }}</td>
                             <td class="p-3">{{ $cliente->telefono }}</td>
-                            <td class="p-3">
-                                {{ in_array($cliente->asesorado, ['w3', 'w7']) ? 'Whatsapp' : $cliente->asesorado }}
+                            <td class="p-3 capitalize">
+                                @if (in_array($cliente->asesorado, ['w3', 'w7']))
+                                    whatsapp
+                                @elseif (in_array($cliente->asesorado, ['call']))
+                                    llamada
+                                @else
+                                    {{ $cliente->asesorado }}
+                                @endif
+
                             </td>
                             <td class="p-3">{{ $cliente->updated_at->format('d / m / y') }}</td>
                             <td class="p-3">{{ $cliente->duracion }} dias</td>
@@ -62,7 +69,6 @@
                     @endforelse
                 </tbody>
             </table>
-
             <div class="mt-4">
                 {{ $clientes->links() }}
             </div>

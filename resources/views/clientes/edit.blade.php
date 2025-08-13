@@ -16,13 +16,15 @@
             </div>
             <div class="mb-4">
                 <label class="block">Asesorado por:</label>
-                <select type="text" name="asesorado" class="w-full border rounded p-2 bg-white dark:bg-gray-900"
-                    value="{{ old('asesorado') }}">
+                <select name="asesorado" class="w-full border rounded p-2 bg-white dark:bg-gray-900">
                     <option value="">Seleccionar medio</option>
-                    <option value="w3">Whatsapp x3</option>
-                    <option value="w7">Whatsapp x7</option>
-                    <option value="sucursal">Sucursal</option>
-                    <option value="call">Llamado</option>
+                    <option value="w3" {{ old('asesorado', $cliente->asesorado ?? '') == 'w3' ? 'selected' : '' }}>
+                        Whatsapp x3</option>
+                    <option value="w7" {{ old('asesorado', $cliente->asesorado ?? '') == 'w7' ? 'selected' : '' }}>
+                        Whatsapp x7</option>
+                    <option value="sucursal" {{ old('asesorado', $cliente->asesorado ?? '') == 'sucursal' ? 'selected' : '' }}>Sucursal</option>
+                    <option value="call" {{ old('asesorado', $cliente->asesorado ?? '') == 'call' ? 'selected' : '' }}>
+                        Llamado</option>
                 </select>
                 @error('asesorado') <p class="text-red-500">{{ $message }}</p> @enderror
             </div>
