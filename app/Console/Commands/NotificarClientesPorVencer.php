@@ -5,11 +5,18 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use App\Models\Cliente;
 use Carbon\Carbon;
+use Illuminate\Console\Scheduling\Schedule;
 
 class NotificarClientesPorVencer extends Command
 {
     protected $signature = 'notificar:clientes-por-vencer';
     protected $description = 'Enviar notificaciones de clientes que están por vencer';
+
+    protected function schedule(Schedule $schedule): void
+    {
+        $schedule->command('notificar:clientes-por-vencer')
+            ->dailyAt('08:00');
+    }
 
     public function handle()
     {
@@ -20,7 +27,6 @@ class NotificarClientesPorVencer extends Command
             if (!$cliente->updated_at) return false;
 
             $vencimiento = $cliente->updated_at->copy()->addDays($cliente->duracion);
-
             return $vencimiento->isSameDay($fechaAviso);
         });
 
