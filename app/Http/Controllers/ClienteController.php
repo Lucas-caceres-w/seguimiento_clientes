@@ -79,6 +79,9 @@ class ClienteController extends Controller
             'duracion' => $duracion,
         ]);
 
+        // Forzar actualización de la marca de tiempo
+        $cliente->touch();
+
         return redirect()->route('clientes.index')->with('success', 'Cliente actualizado correctamente.');
     }
 
