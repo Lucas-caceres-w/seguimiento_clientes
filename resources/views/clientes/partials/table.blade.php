@@ -2,6 +2,7 @@
     <thead>
         <tr class="bg-gray-200 dark:bg-gray-700 text-left">
             <th class="p-3">DNI</th>
+            <th class="p-3">Nombre</th>
             <th class="p-3">Teléfono</th>
             <th class="p-3">Asesorado</th>
             <th class="p-3">Ultima actualización</th>
@@ -18,6 +19,7 @@
             @endphp
             <tr class="{{ $vencimiento->isPast() ? 'bg-red-900' : '' }}">
                 <td class="p-3">{{ $cliente->dni }}</td>
+                <td class="p-3">{{ $cliente->nombre ? $cliente->nombre : '------'}}</td>
                 <td class="p-3">{{ $cliente->telefono }}</td>
                 <td class="p-3 capitalize">
                     @if (in_array($cliente->asesorado, ['w3', 'w7']))

@@ -10,13 +10,19 @@
             @method('PUT')
             <div class="mb-4">
                 <label class="block">DNI</label>
-                <input type="text" name="dni" class="w-full border rounded p-2 bg-white dark:bg-gray-800"
+                <input required type="text" name="dni" class="w-full border rounded p-2 bg-white dark:bg-gray-800"
                     value="{{ old('dni', $cliente->dni) }}">
                 @error('dni') <p class="text-red-500">{{ $message }}</p> @enderror
             </div>
             <div class="mb-4">
+                <label class="block">Nombre</label>
+                <input type="text" name="nombre" class="w-full border rounded p-2 bg-white dark:bg-gray-800"
+                    value="{{ old('nombre', $cliente->nombre) }}">
+                @error('nombre') <p class="text-red-500">{{ $message }}</p> @enderror
+            </div>
+            <div class="mb-4">
                 <label class="block">Asesorado por:</label>
-                <select name="asesorado" class="w-full border rounded p-2 bg-white dark:bg-gray-900">
+                <select required name="asesorado" class="w-full border rounded p-2 bg-white dark:bg-gray-900">
                     <option value="">Seleccionar medio</option>
                     <option value="w3" {{ old('asesorado', $cliente->asesorado ?? '') == 'w3' ? 'selected' : '' }}>
                         Whatsapp x3</option>
@@ -30,7 +36,7 @@
             </div>
             <div class="mb-4">
                 <label class="block">Teléfono</label>
-                <input type="text" name="telefono" class="w-full border rounded p-2 bg-white dark:bg-gray-800"
+                <input required type="text" name="telefono" class="w-full border rounded p-2 bg-white dark:bg-gray-800"
                     value="{{ old('telefono', $cliente->telefono) }}">
                 @error('telefono') <p class="text-red-500">{{ $message }}</p> @enderror
             </div>

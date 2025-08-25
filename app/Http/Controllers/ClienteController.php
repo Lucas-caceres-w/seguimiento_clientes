@@ -36,6 +36,7 @@ class ClienteController extends Controller
         $request->validate([
             'dni' => 'required|string|max:255|unique:clientes,dni',
             'asesorado' => 'required|string|max:255',
+            'nombre' => 'nullable|string|max:50',
             'telefono' => 'nullable|string|max:20',
         ], [
             'dni.unique' => 'El DNI ingresado ya existe en la base de datos.',
@@ -48,6 +49,7 @@ class ClienteController extends Controller
             'dni' => $request->dni,
             'asesorado' => $request->asesorado,
             'telefono' => $request->telefono,
+            'nombre' => $request->nombre,
             'user_id' => Auth::id(),
             'duracion' => $duracion,
         ]);
@@ -65,6 +67,7 @@ class ClienteController extends Controller
         $request->validate([
             'dni' => 'required|string|max:255|unique:clientes,dni,' . $cliente->id,
             'asesorado' => 'required|string|max:255',
+            'nombre' => 'nullable|string|max:50',
             'telefono' => 'nullable|string|max:20',
         ], [
             'dni.unique' => 'El DNI ingresado ya existe en la base de datos.',
@@ -75,6 +78,7 @@ class ClienteController extends Controller
         $cliente->update([
             'dni' => $request->dni,
             'asesorado' => $request->asesorado,
+            'nombre' => $request->nombre,
             'telefono' => $request->telefono,
             'duracion' => $duracion,
         ]);

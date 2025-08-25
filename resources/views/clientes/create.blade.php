@@ -9,21 +9,28 @@
                                     @csrf
                                     <div class="mb-4">
                                                 <label class="block">DNI</label>
-                                                <input type="text" name="dni"
+                                                <input required type="text" name="dni"
                                                             class="w-full border rounded p-2 bg-white dark:bg-gray-900"
                                                             value="{{ old('dni') }}">
                                                 @error('dni') <p class="text-red-500">{{ $message }}</p> @enderror
                                     </div>
                                     <div class="mb-4">
+                                                <label class="block">Nombre (opcional)</label>
+                                                <input type="text" name="nombre"
+                                                            class="w-full border rounded p-2 bg-white dark:bg-gray-900"
+                                                            value="{{ old('nombre') }}">
+                                                @error('nombre') <p class="text-red-500">{{ $message }}</p> @enderror
+                                    </div>
+                                    <div class="mb-4">
                                                 <label class="block">Teléfono</label>
-                                                <input type="text" name="telefono"
+                                                <input required type="text" name="telefono"
                                                             class="w-full border rounded p-2 bg-white dark:bg-gray-900"
                                                             value="{{ old('telefono') }}">
                                                 @error('telefono') <p class="text-red-500">{{ $message }}</p> @enderror
                                     </div>
                                     <div class="mb-4">
                                                 <label class="block">Asesorado por:</label>
-                                                <select type="text" name="asesorado"
+                                                <select required type="text" name="asesorado"
                                                             class="w-full border rounded p-2 bg-white dark:bg-gray-900"
                                                             value="{{ old('asesorado') }}">
                                                             <option value="">Seleccionar medio</option>
