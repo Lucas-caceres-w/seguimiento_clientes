@@ -13,11 +13,18 @@ class ClienteController extends Controller
     {
         $query = Cliente::where('user_id', Auth::id());
 
+        // 🔎 Filtro por DNI
         if ($request->filled('dni')) {
             $query->where('dni', 'like', '%' . $request->dni . '%');
         }
 
-        $clientes = $query->orderBy('updated_at', 'asc')->paginate(10);
+        // 🔎 Filtro por vencidos
+        if ($request->boolean('vencidos')) {
+            $query->whereRaw("DATE_ADD(updated_at, INTERVAL duracion DAY) < NOW()");
+        }
+
+        // 👇 mantenemos los parámetros en la paginación
+        $clientes = $query->orderBy('updated_at', 'asc')->paginate(10)->withQueryString();
 
         if ($request->ajax()) {
             return view('clientes.partials.table', compact('clientes'))->render();
@@ -25,6 +32,8 @@ class ClienteController extends Controller
 
         return view('clientes.index', compact('clientes'));
     }
+
+
 
     public function create()
     {

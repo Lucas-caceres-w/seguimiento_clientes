@@ -1,4 +1,13 @@
 <table class="w-full border-collapse text-gray-800 dark:text-gray-200 bg-white dark:bg-gray-800 shadow-md rounded">
+    <div class="flex gap-2 mb-4">
+        <a href="{{ route('clientes.index') }}" class="bg-blue-500 text-white px-4 py-2 rounded">
+            Todos
+        </a>
+
+        <a href="{{ route('clientes.index', ['vencidos' => 1]) }}" class="bg-red-500 text-white px-4 py-2 rounded">
+            Vencidos
+        </a>
+    </div>
     <thead>
         <tr class="bg-gray-200 dark:bg-gray-700 text-left">
             <th class="p-3">DNI</th>
@@ -19,7 +28,7 @@
             @endphp
             <tr class="{{ $vencimiento->isPast() ? 'bg-red-900' : '' }}">
                 <td class="p-3">{{ $cliente->dni }}</td>
-                <td class="p-3">{{ $cliente->nombre ? $cliente->nombre : '------'}}</td>
+                <td class="p-3">{{ $cliente->nombre ? $cliente->nombre : '------' }}</td>
                 <td class="p-3">{{ $cliente->telefono }}</td>
                 <td class="p-3 capitalize">
                     @if (in_array($cliente->asesorado, ['w3', 'w7']))
@@ -38,7 +47,7 @@
                 </td>
                 <td class="p-3">
                     {{ $vencimiento->isPast() ? 'Si' : 'No' }}
-                </td>                
+                </td>
                 <td class="p-3 flex gap-2">
                     <a href="{{ route('clientes.edit', $cliente) }}"
                         class="bg-yellow-500 text-white px-3 py-1 rounded">Editar</a>
